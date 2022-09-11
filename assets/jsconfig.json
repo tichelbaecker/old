@@ -1,0 +1,12 @@
+{
+ "compilerOptions": {
+  "baseUrl": ".",
+  "paths": {
+   "*": [
+    "../../../../../var/folders/ts/qk3dsqd94d541bwqz57jbn400000gn/T/hugo_cache/modules/filecache/modules/pkg/mod/wangchucheng.com/hugo-marble/search@v0.1.0/_vendor/github.com/krisk/Fuse/dist/fuse.esm.min.js/*",
+    "../_vendor/github.com/FortAwesome/Font-Awesome/js-packages/@fortawesome/fontawesome-svg-core/*",
+    "../_vendor/github.com/FortAwesome/Font-Awesome/js-packages/@fortawesome/free-solid-svg-icons/*"
+   ]
+  }
+ }
+}
