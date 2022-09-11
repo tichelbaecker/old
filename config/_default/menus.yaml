@@ -1,0 +1,10 @@
+#main:
+#  - name: Home
+#    url: '#home'
+#    weight: 1
+#  - name: Posts
+#    url: /posts/
+#    weight: 2
+#  - name: Software
+#    url: /software/
+#    weight: 3
