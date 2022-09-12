@@ -25,16 +25,17 @@ jobs:
           sudo mv hugo /usr/local/bin
 
       - name: 🛠️ Build
-        run: hugo --source website --destination output --cleanDestinationDir --baseURL https://swharden.com/csdv/ --debug --minify
+        run: hugo --source website --destination output --cleanDestinationDir --baseURL https://tichelbaecker.github.io --debug --minify
 
-      - name: 🔑 Install SSH Key
-        run: |
-          install -m 600 -D /dev/null ~/.ssh/id_rsa
-          echo "${{ secrets.REMOTE_SSH_KEY }}" > ~/.ssh/id_rsa
-          echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+      #- name: 🔑 Install SSH Key
+      
+      #  run: |
+      #    install -m 600 -D /dev/null ~/.ssh/id_rsa
+      #    echo "${{ secrets.REMOTE_SSH_KEY }}" > ~/.ssh/id_rsa
+      #    echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
 
-      - name: 🚀 Deploy
-        run: rsync --archive --delete --stats -e 'ssh -p 18765' 'website/output/' ${{ secrets.REMOTE_DEST }}
+      #- name: 🚀 Deploy
+       # run: rsync --archive --delete --stats -e 'ssh -p 18765' 'website/output/' ${{ secrets.REMOTE_DEST }}
 
       #- name: 🧹 Purge Website Cache
       #run: curl --user deploy:${{ secrets.CACHE_PASSWORD }} https://scottplot.net/admin/clear-cache.php
