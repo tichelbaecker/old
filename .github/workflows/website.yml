@@ -25,7 +25,7 @@ jobs:
           sudo mv hugo /usr/local/bin
 
       - name: 🛠️ Build
-        run: hugo --source website --destination output --cleanDestinationDir --baseURL https://tichelbaecker.github.io --debug --minify
+        run: hugo --minify
 
       #- name: 🔑 Install SSH Key
       
