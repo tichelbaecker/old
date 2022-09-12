@@ -1,10 +1,10 @@
-baseURL: tichelbaecker.github.io
+baseURL:
 title: 
 
 # Comment when installing using Hugo Modules
 # theme: eureka
 # Uncomment when installing using Hugo Modules
-theme: github.com/wangchucheng/hugo-eureka
+theme: wangchucheng.com/hugo-eureka
 
 paginate: 3
 copyright: >
@@ -38,6 +38,3 @@ taxonomies:
   tag: tags
   series: series
   author: authors
-
-build:
-  useResourceCacheWhen: always
