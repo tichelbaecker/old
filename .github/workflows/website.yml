@@ -1,49 +1,32 @@
-name: Website
+name: github pages
 
 on:
-  workflow_dispatch:
   push:
-    #paths:
-    #- "website/**"
+    branches:
+      - main  # Set a branch to deploy
+  pull_request:
 
 jobs:
-  build:
-    name: Build and Deploy
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-22.04
     steps:
-      - name: 🛒 Checkout
-        uses: actions/checkout@v2
-
-      - name: ✨ Setup Hugo
-        env:
-          HUGO_VERSION: 0.92.2
-        run: |
-          mkdir ~/hugo
-          cd ~/hugo
-          curl -L "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" --output hugo.tar.gz
-          tar -xvzf hugo.tar.gz
-          sudo mv hugo /usr/local/bin
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
         with:
-          node-version: '16'
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
-      - name: Install Node.js Dependencies
-        run: npm install
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          # extended: true
 
-      - name: 🛠️ Build
+      - name: Build
         run: hugo --minify
 
-      #- name: 🔑 Install SSH Key
-      
-      #  run: |
-      #    install -m 600 -D /dev/null ~/.ssh/id_rsa
-      #    echo "${{ secrets.REMOTE_SSH_KEY }}" > ~/.ssh/id_rsa
-      #    echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-
-      #- name: 🚀 Deploy
-       # run: rsync --archive --delete --stats -e 'ssh -p 18765' 'website/output/' ${{ secrets.REMOTE_DEST }}
-
-      #- name: 🧹 Purge Website Cache
-      #run: curl --user deploy:${{ secrets.CACHE_PASSWORD }} https://scottplot.net/admin/clear-cache.php
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
